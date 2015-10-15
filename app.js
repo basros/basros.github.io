@@ -17,7 +17,26 @@
         // this callback will be called asynchronously
         // when the response is available
         self.repos = response.data;
+
+        // above API call doesn't tell the sources of forks, so...
+        self.repos.forEach(function(repo){
+          if(repo.fork){
+            $http.get('https://api.github.com/repos/'+me+'/'+repo.name).success(function(data) {
+              repo.source = data.source.html_url;
+            });
+          }
+        });
+
         $('#repoQueryInput').focus();
+
+        // attach the click event to a static element as the list is not there yet
+        $("body").on("click", ".forkedFromLink", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('fooo!bar!');
+          window.location = $(e.currentTarget).data('link');
+        });
+
       }, function errorCallback(response) {
         // called asynchronously if an error occurs
         // or server returns response with an error status.

@@ -4,6 +4,8 @@
     <title>GitHub Pages</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="http://bootswatch.com/cyborg/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="custom.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
@@ -25,6 +27,7 @@
             <li ng-class="{active:tab.isSet(1)}">
               <a ng-click="tab.setTab(1)" href>Links</a></li>
           </ul>
+
           <div ng-show="tab.isSet(1)" ng-controller="BookmarkController as bc">
             <h3>Links</h3>
             <div class="list-group">
@@ -34,6 +37,7 @@
               </a>
             </div>             
           </div>
+
           <div ng-show="tab.isSet(2)" ng-controller='RepoController as rc'>
             <h3>Repos</h3>
             <div class="well form-group">
@@ -41,10 +45,13 @@
             </div>
             <div class="list-group">
               <a ng-repeat="repo in rc.repos | filter:{name:query} | orderBy: 'name'" class="list-group-item" href="{{repo.html_url}}">
-                {{repo.name}}
+                <i ng-if="repo.fork" class="fa fa-code-fork fa-lg pull-right forkedFromLink" data-link="{{repo.source}}"></i>
+                <strong>{{repo.name}}</strong><br>
+                {{repo.description}}
               </a>
             </div>
           </div>
+
           <div ng-show="tab.isSet(3)" ng-controller='GistController as gc'>
             <h3>Gists</h3>
             <div class="well form-group">
