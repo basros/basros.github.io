@@ -29,7 +29,7 @@
           </ul>
 
           <div ng-show="tab.isSet(1)" ng-controller="BookmarkController as bc">
-            <h3>Links</h3>
+            <br>
             <div class="list-group">
               <a ng-repeat="bookmark in bc.bookmarks | orderBy: 'title'" class="list-group-item" href="{{bookmark.url}}">
                 <img ng-src="{{bookmark.url}}/favicon.ico" />
@@ -39,9 +39,10 @@
           </div>
 
           <div ng-show="tab.isSet(2)" ng-controller='RepoController as rc'>
-            <h3>Repos</h3>
-            <div class="well form-group">
-              <label>Search</label><input ng-model="query" class="form-control" id="repoQueryInput">
+            <div class="row">
+              <div class="col-md-3 col-md-offset-9 form-group">
+                <input ng-model="query" class="form-control input-sm" id="repoQueryInput" placeholder="search ...">
+              </div>
             </div>
             <div class="list-group">
               <a ng-repeat="repo in rc.repos | filter:{name:query} | orderBy: 'name'" class="list-group-item" href="{{repo.html_url}}">
@@ -53,9 +54,10 @@
           </div>
 
           <div ng-show="tab.isSet(3)" ng-controller='GistController as gc'>
-            <h3>Gists</h3>
-            <div class="well form-group">
-              <label>Search</label><input ng-model="query" class="form-control" id="gistQueryInput">
+            <div class="row">
+              <div class="col-md-3 col-md-offset-9 form-group">
+                <input ng-model="query" class="form-control input-sm" id="gistQueryInput" placeholder="search ...">
+              </div>
             </div>
             <div class="list-group">
               <a ng-repeat="gist in gc.gists | filter:{description:query} | orderBy: 'updated_at'" class="list-group-item" href="{{gist.html_url}}">
