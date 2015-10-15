@@ -20,16 +20,23 @@
       <div class="row">
         <section class="tab" ng-controller="TabController as tab">
           <ul class="nav nav-pills">
+            <li ng-class="{active:tab.isSet(1)}">
+              <a ng-click="tab.setTab(1)" href>Start</a></li>
             <li ng-class="{active:tab.isSet(2)}">
               <a ng-click="tab.setTab(2)" href>Repos</a></li>
             <li ng-class="{active:tab.isSet(3)}">
               <a ng-click="tab.setTab(3)" href>Gists</a></li>
-            <li ng-class="{active:tab.isSet(1)}">
-              <a ng-click="tab.setTab(1)" href>Links</a></li>
           </ul>
 
           <div ng-show="tab.isSet(1)" ng-controller="BookmarkController as bc">
-            <br>
+            <div class="row" style="height: 20vh;"></div>
+            <div class="jumbotron">
+              <div class="input-group">
+                <input class="form-control input-lg" ng-model="query" id="googleQueryInput" placeholder="search google ...">
+                <a class="btn btn-primary input-group-addon" href="https://google.com/#q={{query}}">Go!</a>
+              </div>
+            </div>
+
             <div class="list-group">
               <a ng-repeat="bookmark in bc.bookmarks | orderBy: 'title'" class="list-group-item" href="{{bookmark.url}}">
                 <img ng-src="{{bookmark.url}}/favicon.ico" />

@@ -7,6 +7,7 @@
     var self = this;
     $http.get('bookmarks.json').success(function(data) {
       self.bookmarks = data;
+      $('#googleQueryInput').focus();
     });
   });
   
@@ -26,8 +27,6 @@
             });
           }
         });
-
-        $('#repoQueryInput').focus();
 
         // attach the click event to a static element as the list is not there yet
         $("body").on("click", ".forkedFromLink", function(e){
@@ -50,7 +49,6 @@
     $http({method: 'GET', url: 'https://api.github.com/users/'+me+'/gists'}).then(
       function successCallback(response) {
         self.gists = response.data;
-        $('#gistQueryInput').focus();
       }, function errorCallback(response) {
         console.log('failed to load my github gists');
       }
@@ -58,7 +56,7 @@
   });  
   
   app.controller('TabController', function(){
-    this.tab = 2;
+    this.tab = 1;
     this.isSet = function(isSet){
       return this.tab === isSet;
     };
