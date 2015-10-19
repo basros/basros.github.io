@@ -9,6 +9,12 @@
       self.bookmarks = data;
       $('#googleQueryInput').focus();
     });
+
+    $('#googleQueryInput').keypress(function(e) { // http://stackoverflow.com/a/979686/3449673
+    if(e.which == 13) {
+      $('#googleQueryBtn')[0].click(); // http://stackoverflow.com/a/12801548/3449673
+    }
+});
   });
   
   app.controller('RepoController', function($http){
