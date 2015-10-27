@@ -11,12 +11,12 @@
     });
 
     $('#googleQueryInput').keypress(function(e) { // http://stackoverflow.com/a/979686/3449673
-    if(e.which == 13) {
-      $('#googleQueryBtn')[0].click(); // http://stackoverflow.com/a/12801548/3449673
-    }
-});
+      if(e.which == 13) {
+        $('#googleQueryBtn')[0].click(); // http://stackoverflow.com/a/12801548/3449673
+      }
+    });
   });
-  
+
   app.controller('RepoController', function($http){
     var self = this;
     $http({method: 'GET', url: 'https://api.github.com/users/'+me+'/repos'}).then(
@@ -48,8 +48,8 @@
         console.log('failed to load my github repos');
       }
     );
-  });  
-  
+  });
+
   app.controller('GistController', function($http){
     var self = this;
     $http({method: 'GET', url: 'https://api.github.com/users/'+me+'/gists'}).then(
@@ -59,8 +59,8 @@
         console.log('failed to load my github gists');
       }
     );
-  });  
-  
+  });
+
   app.controller('TabController', function(){
     this.tab = 1;
     this.isSet = function(isSet){
@@ -69,6 +69,13 @@
     this.setTab = function(setTab){
       this.tab = setTab;
     };
+  });
+
+  app.controller('AboutController', function($http){
+    $http.get('README.md').success(function(content) {
+      this.html_content = marked(content);
+      $('#readme').html(this.html_content);
+    });
   });
 
 })();
